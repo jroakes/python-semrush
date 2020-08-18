@@ -65,7 +65,7 @@ class SemrushClient(object):
         kwargs['type'] = report_type
         kwargs['key'] = self.key
 
-        response = requests.get(self.api_url, params=kwargs)
+        response = requests.get(self.api_url+"&export_escape=1", params=kwargs)
 
         if response.status_code == 200:
             return response.content
@@ -82,7 +82,7 @@ class SemrushClient(object):
 
         for line in lines[1:]:
             result = {}
-            for i, datum in enumerate(line.split(';')):
+            for i, datum in enumerate(line.split('";"')):
                 result[columns[i]] = datum.strip('"\n\r\t')
             results.append(result)
 
