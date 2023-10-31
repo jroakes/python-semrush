@@ -64,8 +64,9 @@ class SemrushClient(object):
     def retrieve(self, report_type, **kwargs):
         kwargs['type'] = report_type
         kwargs['key'] = self.key
+        kwargs['export_escape'] = 1
 
-        response = requests.get(self.api_url+"&export_escape=1", params=kwargs)
+        response = requests.get(self.api_url, params=kwargs)
 
         if response.status_code == 200:
             return response.content
